@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>云音乐 - 本地播放</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Fullscreen background video (looping, muted). Place `background.mp4` and `background.jpg` in the project root. -->
+    <video id="bg-video" autoplay loop muted playsinline poster="background.jpg" aria-hidden="true">
+      <source src="background.mp4" type="video/mp4" />
+      <!-- Browser will fall back to the poster image if video is unavailable -->
+    </video>
+    <main class="container">
+      <h1>云音乐 - 本地播放列表</h1>
+      <div id="status-msg" aria-live="polite" role="status" class="status-hidden"></div>
+
+      <section class="player">
+        <div class="track-info">
+          <div id="track-title">未选择曲目</div>
+          <div id="track-time">00:00 / 00:00</div>
+        </div>
+
+        <audio id="audio" preload="metadata"></audio>
+
+        <div class="controls">
+          <button id="prev" title="上一首">⏮</button>
+          <button id="play" title="播放/暂停">▶️</button>
+          <button id="next" title="下一首">⏭</button>
+          <button id="loop" title="播放列表循环">🔁</button>
+        </div>
+
+        <input id="progress" type="range" min="0" max="100" value="0" />
+      </section>
+
+      <section class="playlist">
+        <h2>播放列表</h2>
+        <ul id="playlist-list"></ul>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

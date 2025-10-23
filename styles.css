@@ -1,0 +1,68 @@
+:root{
+  --bg:#0f1720;
+  --card:#0b1220;
+  --accent:#6ee7b7;
+  --muted:#94a3b8;
+}
+*{box-sizing:border-box}
+/* Page base */
+body{font-family:Segoe UI, Roboto, "Microsoft YaHei", Arial, sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;color:#0b1220;position:relative;overflow:hidden}
+
+/* Background video - covers the viewport and sits behind content */
+#bg-video{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;filter:contrast(1.02) saturate(1.04)}
+
+/* If video isn't available, the poster will show; body background-color kept as fallback */
+body{background-color: #0f1720}
+/* Main card: make it translucent with backdrop blur so the background shows through clearly (like the provided mockup) */
+.container{width:100%;max-width:850px;background:rgba(255,255,255,0.55);border-radius:12px;padding:16px;box-shadow:0 8px 30px rgba(2,6,23,0.28)}
+
+/* Responsive, legible typography */
+h1{text-align:center;margin:0 0 12px;font-size:clamp(1.25rem, 2.5vw + 0.5rem, 2.25rem)}
+.status-hidden{height:0;opacity:0;transition:opacity .18s ease, height .18s ease}
+.status{margin:8px 0 12px;padding:10px 12px;border-radius:10px;background:linear-gradient(90deg,#fff,#fff);box-shadow:0 6px 12px rgba(2,6,23,0.04);color:#06403a;font-weight:600}
+.player{display:grid;grid-template-columns:1fr;gap:12px;padding:12px;border-radius:8px;background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent)}
+.track-info{display:flex;justify-content:space-between;align-items:center;padding:6px 10px}
+#track-title{font-weight:600;font-size:clamp(1rem, 1.6vw + 0.6rem, 1.15rem)}
+#track-time{color:var(--muted);font-size:clamp(0.8rem, 1.2vw, 0.95rem)}
+.controls{display:flex;gap:12px;align-items:center;justify-content:center}
+.controls button{background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(250,250,250,0.9));border:0;color:var(--accent);padding:8px 12px;border-radius:10px;cursor:pointer;box-shadow:0 6px 12px rgba(16,24,40,0.06);transition:transform .12s ease, box-shadow .12s ease}
+.controls button:hover{transform:translateY(-3px);box-shadow:0 10px 18px rgba(16,24,40,0.08)}
+.controls button.active{background:linear-gradient(90deg,var(--accent),#4ade80);color:#072018}
+
+/* 更显眼的大按钮：播放和循环 */
+#play, #loop{
+  width:64px;height:64px;padding:0;font-size:22px;border-radius:18px;display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#ffffff,#fff9f9);color:var(--accent);box-shadow:0 10px 20px rgba(16,24,40,0.08);
+}
+#play{font-size:24px;background:linear-gradient(180deg,#fffbff,#fff1f6);border:2px solid rgba(255,182,193,0.25)}
+#loop{font-size:20px;background:linear-gradient(180deg,#f0fff9,#ecfff5);border:2px solid rgba(110,231,183,0.18)}
+#play:hover, #loop:hover{transform:translateY(-4px) scale(1.03)}
+
+/* 循环按钮启用时的显著提示（变色 + 微变形） */
+#loop.active{
+  background:linear-gradient(90deg,#6ee7b7,#4ade80);
+  color:#042017;
+  border-color:rgba(34,197,94,0.6);
+  transform:translateY(-2px) scale(1.08) rotate(-6deg);
+  box-shadow:0 16px 30px rgba(34,197,94,0.12), 0 6px 14px rgba(16,24,40,0.06);
+}
+
+/* 平滑过渡包含背景与边框颜色 */
+#loop{transition:transform .12s ease, box-shadow .12s ease, background .18s ease, border-color .18s ease}
+
+#progress{width:100%;-webkit-appearance:none;appearance:none;height:6px;border-radius:6px;background:linear-gradient(90deg,var(--accent),#4ade80);outline:none}
+.playlist{margin-top:10px}
+.playlist h2{margin:8px 0}
+#playlist-list{list-style:none;padding:0;margin:0;max-height:280px;overflow-y:auto;overflow-x:hidden;padding-right:8px}
+
+/* 自定义滚动条样式 */
+#playlist-list::-webkit-scrollbar{width:8px}
+#playlist-list::-webkit-scrollbar-track{background:rgba(255,255,255,0.1);border-radius:4px}
+#playlist-list::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--accent),#4ade80);border-radius:4px;transition:background 0.2s ease}
+#playlist-list::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,#4ade80,var(--accent))}
+#playlist-list li{padding:10px;border-radius:8px;margin-bottom:6px;background:rgba(255,255,255,0.001);display:flex;justify-content:space-between;align-items:center}
+#playlist-list li.playing{background:linear-gradient(90deg, rgba(110,231,183,0.02), rgba(110,231,183,0.005));border:1px solid rgba(110,231,183,0.03)}
+#playlist-list button{background:transparent;border:0;color:#ff8c00;cursor:pointer;font-weight:600}
+
+@media (min-width:700px){
+  .player{grid-template-columns:1fr 300px}
+}
